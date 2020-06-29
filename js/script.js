@@ -1,77 +1,58 @@
 
 $(document).ready(function(){
 
-var date = moment("2018-01-01");
-console.log(date._i );
-
- // date.add(1, 'days');
-// var newDate = date.format('D MMMM');
-// console.log(date.add(1, 'days'));;
- // console.log(date.format('D MMMM'));
-  var numeroGiorni = 31;
-  for (var i = 1; i < numeroGiorni; i++) {
-    $.ajax(
-        {
-          url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
-          method: "GET",
-          success: function (data, stato) {
-            var holidays = data.response;
-
-            for (var key in holidays) {
-              var holidaysKey = holidays[key];
-
-              console.log(holidaysKey.date);
+  var dateBase = moment("2018-01-01");
+  console.log(dateBase);
+  var daysInMonth = dateBase.daysInMonth();
+  console.log(daysInMonth)
 
 
-            }
-            if (holidaysKey.date === date._i ) {
-              var newDate = date.format('D MMMM');
+  for (var i = 0; i < daysInMonth; i++) {
+    if (dateBase._isValid) {
+      var newDate = dateBase.format('D MMMM');
 
-              console.log(newDate);
-               var source = $("#month-template").html();
-               var template = Handlebars.compile(source);
+      console.log(newDate);
+       var source = $("#days-template").html();
+       var template = Handlebars.compile(source);
 
-               var context = {holidaysKey};
-               console.log(context);
-               var html = template(context);
+       var context = {newDate};
+       console.log(context);
+       var html = template(context);
 
-               $('.calendar').append(html).addClass('holidays');
-               // date.add(1, 'days');
-            }else {
-              var newDate = date.format('D MMMM');
+       $('.month').append(html);
 
-              console.log(newDate);
-               var source = $("#month-template").html();
-               var template = Handlebars.compile(source);
+       dateBase.add(1, 'days');
 
-               var context = {newDate};
-               console.log(context);
-               var html = template(context);
+    }
 
-               $('.calendar').append(html);
-               date.add(1, 'days');
-            }
-          },
-          error: function (richiesta, stato, errori) {
-          alert("E' avvenuto un errore. " + errori);
+    $.ajax({
+      url: 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0' ,
+      method: 'GET',
+
+      success: function(data) {
+        var holidays = data.response;
+        console.log(holidays);
+        var holiDays = holidays[0];
+        console.log(holidays[0]);
+
+        for (var i = 0; i < holidays.length; i++) {
+          var singolHoliday = holidays[i];
+          console.log(singolHoliday.date);
+          var listItem = $('.day[data-date="' + singolHoliday.date + '"]');
+          console.log();
+          if(listItem === newDate) {
+            listItem.addClass('holidays');
           }
-
-        });
-   // var newDate = date.format('D MMMM');
-   //
-   // console.log(newDate);
-   //  var source = $("#month-template").html();
-   //  var template = Handlebars.compile(source);
-   //
-   //  var context = {newDate};
-   //  console.log(context);
-   //  var html = template(context);
-   //
-   //  $('.calendar').append(html);
-   //  date.add(1, 'days');
+        }
+      },
+      error: function() {
+        console.log('Errore chiamata festività');
+      }
+    });
 
 
 
   }
+
 
 });

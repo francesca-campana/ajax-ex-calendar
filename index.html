@@ -14,11 +14,9 @@
   <body>
     <div class="calendar">
       <div class="month">
-        <ul>
-          
-        </ul>
 
       </div>
+
 
 
 
@@ -28,11 +26,11 @@
 
 
 
-    <script id="month-template" type="text/x-handlebars-template">
-      <div class="month">
+    <script id="days-template" type="text/x-handlebars-template">
+      <div data-date = {{holidays}} class="day">
         <ul>
           <li>
-            <span>{{newDate}} {{holidaysKey}}</span>
+            <span >{{newDate}} </span>
           </li>
         </ul>
 
