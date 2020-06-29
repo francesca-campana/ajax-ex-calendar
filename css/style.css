@@ -1,11 +1,32 @@
-/* *{
+*{
   margin:0;
   padding: 0;
   box-sizing: border-box;
 }
-.calendar{
-  margin:20px;
-} */
+body {
+  font-family: 'Roboto' , sans-serif;
+}
+.calendar {
+  width: 1170px;
+  margin-left: 20px;
+}
+h2 {
+  padding: 20px;
+}
+li {
+  line-height: 25px;
+}
+
+.button {
+  font-size: 15px;
+  padding: 0 15px;
+}
+
+.month {
+  width: 100%;
+  padding: 20px;
+}
 .holidays {
   color:red;
+  font-weight: bold;
 }

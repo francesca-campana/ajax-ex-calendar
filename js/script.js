@@ -1,58 +1,50 @@
-
 $(document).ready(function(){
+  // Setto primo giorno dell'anno di interesse
+  var startDate = moment("2018-01-01");
 
-  var dateBase = moment("2018-01-01");
-  console.log(dateBase);
-  var daysInMonth = dateBase.daysInMonth();
-  console.log(daysInMonth)
+  // Calcolo quanti giorni ha il mese corrente
+  var daysInMonth = startDate.daysInMonth();
 
+  // Stampo i giorni del mese corrente
+  // Uso un template con Handelbars per scrivere la lista dei giorni
+  var source = document.getElementById("calendar-template").innerHTML;
+  var template = Handlebars.compile(source);
 
+  // Ciclo in base al numero dei giorni del mese corrente per stampare
   for (var i = 0; i < daysInMonth; i++) {
-    if (dateBase._isValid) {
-      var newDate = dateBase.format('D MMMM');
+    var newDay = moment(startDate).add(i,'days');
+    var day = (newDay.format('D'));
+    var month = (newDay.format('MMMM'));
 
-      console.log(newDate);
-       var source = $("#days-template").html();
-       var template = Handlebars.compile(source);
+    // creo un attributo per salvare la data ed usarla per controllare se è festività
+    var totalDate = newDay.format('YYYY-MM-DD');
+    var dateToStamp = {day: day, month: month, date: totalDate};
+    var html = template(dateToStamp);
+    $('.month').append(html);
+  };
 
-       var context = {newDate};
-       console.log(context);
-       var html = template(context);
-
-       $('.month').append(html);
-
-       dateBase.add(1, 'days');
-
-    }
-
+  // Chiamata Ajax per vedere le festività del mese corrente
     $.ajax({
-      url: 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0' ,
+      url: 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0',
       method: 'GET',
-
       success: function(data) {
-        var holidays = data.response;
-        console.log(holidays);
-        var holiDays = holidays[0];
-        console.log(holidays[0]);
 
+        // Vedere le festività del mese corrente
+        var holidays = data.response;
         for (var i = 0; i < holidays.length; i++) {
-          var singolHoliday = holidays[i];
-          console.log(singolHoliday.date);
-          var listItem = $('.day[data-date="' + singolHoliday.date + '"]');
-          console.log();
-          if(listItem === newDate) {
-            listItem.addClass('holidays');
-          }
-        }
+          var dateHolidays = holidays[i].date;
+          var nameHolidays = holidays[i].name;
+          console.log(nameHolidays);
+
+          // Chi ha l'attributo data-date uguale alla festività
+          // prende la classe per evidenziare la festività
+          $(".day-calendar[data-date='" + dateHolidays + "']").append(" &minus; " + nameHolidays);
+          $(".day-calendar[data-date='" + dateHolidays + "']").addClass('holidays');
+        };
       },
       error: function() {
-        console.log('Errore chiamata festività');
+        alert('errore info holidays');
       }
     });
-
-
-
-  }
-
-
+  // Fine chiamata ajax
 });

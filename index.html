@@ -12,30 +12,24 @@
     <title></title>
   </head>
   <body>
+    <!-- Inizio calendario -->
     <div class="calendar">
-      <div class="month">
+      <h2>Gennaio 2018</h2>
+      <button class="button">Precedente</button>
+      <button class="button">Successivo</button>
 
-      </div>
+      <ul class="month">
 
-
-
+      </ul>
 
     </div>
+    <!-- Fine calendario -->
 
-
-
-
-
-    <script id="days-template" type="text/x-handlebars-template">
-      <div data-date = {{holidays}} class="day">
-        <ul>
-          <li>
-            <span >{{newDate}} </span>
-          </li>
-        </ul>
-
-      </div>
+    <!-- Template -->
+    <script id="calendar-template" type="text/x-handlebars-template">
+    <li class='day-calendar' data-date="{{date}}">{{day}} {{month}}</li>
     </script>
+    <!-- Fine template  -->
     <script type="text/javascript" src="js/script.js">
     </script>
   </body>
