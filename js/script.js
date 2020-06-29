@@ -2,25 +2,14 @@
 $(document).ready(function(){
 
 var date = moment("2018-01-01");
-console.log(date);
+console.log(date._i );
+
  // date.add(1, 'days');
 // var newDate = date.format('D MMMM');
 // console.log(date.add(1, 'days'));;
  // console.log(date.format('D MMMM'));
   var numeroGiorni = 31;
   for (var i = 1; i < numeroGiorni; i++) {
-
-   var newDate = date.format('D MMMM')
-   console.log(newDate);
-    var source = $("#month-template").html();
-    var template = Handlebars.compile(source);
-
-    var context = {newDate};
-    console.log(context);
-    var html = template(context);
-
-    $('.calendar').append(html);
-    date.add(1, 'days');
     $.ajax(
         {
           url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
@@ -29,7 +18,38 @@ console.log(date);
             var holidays = data.response;
 
             for (var key in holidays) {
-              console.log(holidays[key]);
+              var holidaysKey = holidays[key];
+
+              console.log(holidaysKey.date);
+
+
+            }
+            if (holidaysKey.date === date._i ) {
+              var newDate = date.format('D MMMM');
+
+              console.log(newDate);
+               var source = $("#month-template").html();
+               var template = Handlebars.compile(source);
+
+               var context = {holidaysKey};
+               console.log(context);
+               var html = template(context);
+
+               $('.calendar').append(html).addClass('holidays');
+               // date.add(1, 'days');
+            }else {
+              var newDate = date.format('D MMMM');
+
+              console.log(newDate);
+               var source = $("#month-template").html();
+               var template = Handlebars.compile(source);
+
+               var context = {newDate};
+               console.log(context);
+               var html = template(context);
+
+               $('.calendar').append(html);
+               date.add(1, 'days');
             }
           },
           error: function (richiesta, stato, errori) {
@@ -37,6 +57,19 @@ console.log(date);
           }
 
         });
+   // var newDate = date.format('D MMMM');
+   //
+   // console.log(newDate);
+   //  var source = $("#month-template").html();
+   //  var template = Handlebars.compile(source);
+   //
+   //  var context = {newDate};
+   //  console.log(context);
+   //  var html = template(context);
+   //
+   //  $('.calendar').append(html);
+   //  date.add(1, 'days');
+
 
 
   }
