@@ -7,14 +7,14 @@ $(document).ready(function(){
 
   // Stampo i giorni del mese corrente
   // Uso un template con Handelbars per scrivere la lista dei giorni
-  var source = document.getElementById("calendar-template").innerHTML;
+  var source = $("#calendar-template").html();
   var template = Handlebars.compile(source);
 
   // Ciclo in base al numero dei giorni del mese corrente per stampare
   for (var i = 0; i < daysInMonth; i++) {
     var newDay = moment(startDate).add(i,'days');
-    var day = (newDay.format('D'));
-    var month = (newDay.format('MMMM'));
+    var day = newDay.format('D');
+    var month = newDay.format('MMMM');
 
     // creo un attributo per salvare la data ed usarla per controllare se è festività
     var totalDate = newDay.format('YYYY-MM-DD');
@@ -23,7 +23,7 @@ $(document).ready(function(){
     $('.month').append(html);
   };
 
-  // Chiamata Ajax per vedere le festività del mese corrente
+  // Chiamata Ajax per inserire le festività del mese corrente
     $.ajax({
       url: 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0',
       method: 'GET',
