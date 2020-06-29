@@ -10,10 +10,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 1050px;
+  margin: auto;
 }
 .calendar {
-  width:100vw;
-  height: 100vh;
+  width:100%;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
 }
@@ -31,27 +33,30 @@ li {
 .button {
   font-size: 15px;
   padding: 0 15px;
+  padding-left: 10px;
+  /* color: coral;
+  background: white; */
 }
 
 .month {
-  width: 1000px;
-  height: 1000px;
+  width: 1050px;
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
   color: gray;
 }
 .square {
-  height: 200px;
+  height: 150px;
+
   border: 1px solid lightgray;
   flex-basis: calc( 100% / 7 );
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px;
+  padding: 4px;
   text-align: center;
 }
 .holidays {
-  color:red;
+  color: red;
   font-weight: bold;
 }
