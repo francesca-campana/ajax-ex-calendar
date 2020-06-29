@@ -26,13 +26,18 @@ console.log(date);
           url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
           method: "GET",
           success: function (data, stato) {
-            console.log(data);
+            var holidays = data.response;
+
+            for (var key in holidays) {
+              console.log(holidays[key]);
+            }
           },
           error: function (richiesta, stato, errori) {
           alert("E' avvenuto un errore. " + errori);
           }
 
         });
+
 
   }
 
