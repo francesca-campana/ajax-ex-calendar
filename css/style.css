@@ -59,4 +59,8 @@ li {
 .holidays {
   color: red;
   font-weight: bold;
+
+}
+.red {
+  border: 1px solid red;
 }
