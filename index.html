@@ -31,6 +31,7 @@
     <!-- Template -->
     <script id="calendar-template" type="text/x-handlebars-template">
       <div class="square" data-date="{{date}}">
+        <li class='day-week' data-date="{{date}}">{{weekDay}}</li>
         <li class='day-calendar' data-date="{{date}}">{{day}} {{month}}</li>
       </div>
 

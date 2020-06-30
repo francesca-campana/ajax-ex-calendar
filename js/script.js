@@ -59,6 +59,7 @@ $(document).ready(function(){
     // Ciclo in base al numero dei giorni del mese corrente per stampare
     for (var i = 0; i < daysInMonth; i++) {
       var newDay = moment(startDate).add(i,'days');
+      var weekDay = newDay.format('dddd');
       var day = newDay.format('D');
       var month = newDay.format('MMMM');
 
@@ -67,7 +68,8 @@ $(document).ready(function(){
       var dateToStamp = {
         day: day,
         month: month,
-        date: totalDate
+        date: totalDate,
+        weekDay: weekDay
       };
       var html = template(dateToStamp);
       $('.month').append(html);
@@ -98,9 +100,11 @@ $(document).ready(function(){
             // prende la classe per evidenziare la festività
             var dayCurrentAttr = $(".day-calendar[data-date='" + dateHolidays + "']");
             var squareCurrentAttr = $(".square[data-date='" + dateHolidays + "']");
+            var dayWeekCurrentAttr = $(".day-week[data-date='" + dateHolidays + "']");
             dayCurrentAttr.append(' - ' + nameHolidays);
             dayCurrentAttr.addClass('holidays');
             squareCurrentAttr.addClass('red');
+            dayWeekCurrentAttr.addClass('holidays');
 
           };
         },
