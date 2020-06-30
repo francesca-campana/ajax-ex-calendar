@@ -14,14 +14,14 @@
   <body>
     <!-- Inizio calendario -->
     <div class="intestazione">
-      <button id="prev" class="button">Precedente</button>
+      <button id="prev" class="button">Prev</button>
       <h2 data-current-month="" id="current-month">Gennaio 2018</h2>
 
-      <button id="next" class="button">Successivo</button>
+      <button id="next" class="button">Next</button>
     </div>
     <div class="calendar">
 
-      <ul class="month">
+      <ul id="month" class="month">
 
       </ul>
 
@@ -30,7 +30,7 @@
 
     <!-- Template -->
     <script id="calendar-template" type="text/x-handlebars-template">
-      <div class="square">
+      <div class="square" data-date="{{date}}">
         <li class='day-calendar' data-date="{{date}}">{{day}} {{month}}</li>
       </div>
 

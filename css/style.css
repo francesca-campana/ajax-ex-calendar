@@ -32,10 +32,11 @@ li {
 
 .button {
   font-size: 15px;
-  padding: 0 15px;
+  padding: 3px 15px;
   padding-left: 10px;
-  /* color: coral;
-  background: white; */
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  color: gray;
 }
 
 .month {
@@ -47,7 +48,6 @@ li {
 }
 .square {
   height: 150px;
-
   border: 1px solid lightgray;
   flex-basis: calc( 100% / 7 );
   display: flex;
@@ -63,4 +63,5 @@ li {
 }
 .red {
   border: 1px solid red;
+
 }

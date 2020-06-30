@@ -38,9 +38,11 @@ $(document).ready(function(){
   });
 
 
-
+  // Funzione per stampare i giorni del mese corrente
+  // ---> argomento: l'oggetto moment startDate
+  //  ---> return : non ritorna nulla
   function printMonth(startDate){
-     $('.month').html('');
+     $('#month').html('');
     //Stampo il titolo del mese corrente
     $('#current-month').text(startDate.format('MMMM YYYY'));
     $('#current-month').attr('data-current-month', startDate.format('YYYY MM DD'));
@@ -71,7 +73,9 @@ $(document).ready(function(){
       $('.month').append(html);
     };
   }
-
+  // Funzione per stampare le holidays del mese corrente
+  // ---> argomento: l'oggetto moment startDate
+  //  ---> return : non ritorna nulla
   function printHolidays(startDate){
     // Chiamata Ajax per inserire le festività del mese corrente
       $.ajax({
@@ -92,8 +96,12 @@ $(document).ready(function(){
 
             // Chi ha l'attributo data-date uguale alla festività
             // prende la classe per evidenziare la festività
-            $(".day-calendar[data-date='" + dateHolidays + "']").append(' - ' + nameHolidays);
-            $(".day-calendar[data-date='" + dateHolidays + "']").addClass('holidays');
+            var dayCurrentAttr = $(".day-calendar[data-date='" + dateHolidays + "']");
+            var squareCurrentAttr = $(".square[data-date='" + dateHolidays + "']");
+            dayCurrentAttr.append(' - ' + nameHolidays);
+            dayCurrentAttr.addClass('holidays');
+            squareCurrentAttr.addClass('red');
+
           };
         },
         error: function() {
