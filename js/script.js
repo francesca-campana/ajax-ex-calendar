@@ -1,13 +1,46 @@
 $(document).ready(function(){
   // Setto primo giorno dell'anno di interesse
-  var startDate = moment("2018-04-01");
+  var startDate = moment("2018-01-01");
   printMonth(startDate);
-  printHolidays(startDate)
+  printHolidays(startDate);
+
+  $(document).on('click', '#next', function(){
+    // Prendere il mese corrente
+    var currentMonth = $('#current-month').attr('data-current-month');
+    console.log(currentMonth);
+    var momentCurrentMonth = moment(currentMonth);
+    var nextMonth = momentCurrentMonth.add(1, 'months');
+    if (nextMonth.year() === 2018) {
+      printMonth(nextMonth);
+      printHolidays(nextMonth);
+    }else {
+      alert('Puoi navigare solo nell\'anno 2018');
+    }
+
+
+  });
+
+  $(document).on('click', '#prev', function(){
+    // Prendere il mese corrente
+    var currentMonth = $('#current-month').attr('data-current-month');
+    console.log(currentMonth);
+    var momentCurrentMonth = moment(currentMonth);
+    var prevMonth = momentCurrentMonth.subtract(1, 'months');
+    if (prevMonth.year() === 2018) {
+      printMonth(prevMonth);
+      printHolidays(prevMonth);
+    }else {
+      alert('Puoi navigare solo nell\'anno 2018');
+    }
+  });
+
+
 
   function printMonth(startDate){
-
+     $('.month').html('');
     //Stampo il titolo del mese corrente
-    $('#current-month').text(startDate.format('MMMM YYYY'))
+    $('#current-month').text(startDate.format('MMMM YYYY'));
+    $('#current-month').attr('data-current-month', startDate.format('YYYY MM DD'));
     // Calcolo quanti giorni ha il mese corrente
     var daysInMonth = startDate.daysInMonth();
 
