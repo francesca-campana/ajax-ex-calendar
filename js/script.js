@@ -1,6 +1,7 @@
 $(document).ready(function(){
   // Setto primo giorno dell'anno di interesse
   var startDate = moment("2018-01-01");
+
   printMonth(startDate);
   printHolidays(startDate);
 
@@ -10,6 +11,7 @@ $(document).ready(function(){
     console.log(currentMonth);
     var momentCurrentMonth = moment(currentMonth);
     var nextMonth = momentCurrentMonth.add(1, 'months');
+    // Stampo solo se è l'anno 2018
     if (nextMonth.year() === 2018) {
       printMonth(nextMonth);
       printHolidays(nextMonth);
@@ -26,6 +28,7 @@ $(document).ready(function(){
     console.log(currentMonth);
     var momentCurrentMonth = moment(currentMonth);
     var prevMonth = momentCurrentMonth.subtract(1, 'months');
+    // Stampo solo se è l'anno 2018
     if (prevMonth.year() === 2018) {
       printMonth(prevMonth);
       printHolidays(prevMonth);
@@ -89,7 +92,7 @@ $(document).ready(function(){
 
             // Chi ha l'attributo data-date uguale alla festività
             // prende la classe per evidenziare la festività
-            $(".day-calendar[data-date='" + dateHolidays + "']").append(" &minus; " + nameHolidays);
+            $(".day-calendar[data-date='" + dateHolidays + "']").append(' - ' + nameHolidays);
             $(".day-calendar[data-date='" + dateHolidays + "']").addClass('holidays');
           };
         },
